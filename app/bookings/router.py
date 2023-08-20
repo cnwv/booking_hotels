@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+from app.bookings.dao import BookingDAO
+from app.bookings.schemas import SBooking
 
 router = APIRouter(
     prefix="/bookings",
@@ -7,5 +9,6 @@ router = APIRouter(
 
 
 @router.get("")
-def get_bookings():
-    return '200'
+async def get_bookings() -> list[SBooking]:
+    return await BookingDAO.find_all()
+
