@@ -14,6 +14,8 @@ class Settings:
         self.url = (
             f"postgresql+asyncpg://{self.DB_USER}:{self.DB_PASS}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
         )
+        self.SECRET_KEY = os.environ.get("SECRET_KEY")
+        self.ALGORITHM = os.environ.get("ALGORITHM")
 
 
 settings = Settings()
