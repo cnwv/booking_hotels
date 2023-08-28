@@ -14,3 +14,6 @@ class SBooking(BaseModel):
     total_cost: int
     total_days: int
 
+
+class SUsersBooking(BaseModel):
+    user_id: int
