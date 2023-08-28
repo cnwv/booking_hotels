@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+йоу
+<div>
+    {% for hotel in hotels %}
+    <div style="display: flex; margin-bottom: 15px; justify-content: center">
+        <img src="{{ url_for('static', path='images/' +  hotel.image_id|string + '.webp') }}" alt="hotel's photo" width="300" height="350">
+        <div>
+            <h1>
+                {{ hotel.name }}
+            </h1>
+            <h3>
+                {{ hotel.location }}
+            </h3>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</body>
+</html>

@@ -20,6 +20,10 @@ app.include_router(router_hotels)
 app.include_router(router_page)
 app.include_router(router_images)
 
-
 app.mount("/static", StaticFiles(directory="app/static"), "static")
 
+
+@app.on_event("startup")
+async def startup():
+    redis = aioredis.from_url("redis://localhost")
+    FastAPICache.init(RedisBackend(redis), prefix="cache")
