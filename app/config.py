@@ -6,6 +6,12 @@ load_dotenv()
 
 class Settings:
     def __init__(self):
+        self.SMTP_HOST = os.environ.get("SMTP_HOST")
+        self.SMTP_PORT = os.environ.get("SMTP_PORT")
+        self.SMTP_USER = os.environ.get("SMTP_USER")
+        self.SMTP_PASS = os.environ.get("SMTP_PASS")
+        self.REDIS_HOST = os.environ.get("REDIS_HOST")
+        self.REDIS_PORT = os.environ.get("REDIS_PORT")
         self.DB_HOST = os.environ.get("DB_HOST")
         self.DB_PORT = os.environ.get("DB_PORT")
         self.DB_NAME = os.environ.get("DB_NAME")
@@ -19,5 +25,3 @@ class Settings:
 
 
 settings = Settings()
-
-
