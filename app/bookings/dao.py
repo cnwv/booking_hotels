@@ -29,6 +29,7 @@ class BookingDAO(BaseDAO):
         LEFT JOIN booked_rooms ON booked_rooms.room_id = rooms.id
         WHERE rooms.id = 1
         GROUP BY rooms.quantity, booked_rooms.room_id
+        :rtype: object
         """
         async with async_session_maker() as session:
             booked_rooms = select(Bookings).where(

@@ -23,7 +23,7 @@ async def register_user(user_data: SUserAuth):
 
 
 @router.post("/login")
-async def login(response: Response, user_data: SUserAuth):
+async def login_user(response: Response, user_data: SUserAuth):
     user = await authenticate_user(user_data.email, user_data.password)
     if not user:
         raise IncorrectEmailOrPasswordException
