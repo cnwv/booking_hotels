@@ -28,15 +28,14 @@ async def add_booking(
         user: Users = Depends(get_current_user)
 ):
     booking = await BookingDAO.add(user.id, room_id, date_from, date_to)
-    booking_dict = parse_obj_as(SBooking, booking).dict()
-    print(booking_dict)
-    send_booking_confirmation_email.delay(booking_dict, user.email)
     if not booking:
         raise RoomCannotBeBooked
+    booking_dict = parse_obj_as(SBooking, booking).dict()
+    send_booking_confirmation_email.delay(booking_dict, user.email)
     return booking_dict
 
 
-@router.delete("{booking_id}")
+@router.delete("/{booking_id}")
 async def delete_booking(
         booking_id: int,
         current_user: Users = Depends(get_current_user)
