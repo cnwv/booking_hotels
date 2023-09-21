@@ -7,6 +7,7 @@ load_dotenv()
 class Settings:
     def __init__(self):
         self.MODE = os.environ.get("MODE")
+        self.LOG_LEVEL = os.environ.get("LOG_LEVEL")
         self.SMTP_HOST = os.environ.get("SMTP_HOST")
         self.SMTP_PORT = os.environ.get("SMTP_PORT")
         self.SMTP_USER = os.environ.get("SMTP_USER")
