@@ -16,6 +16,7 @@ from sqladmin import Admin, ModelView
 from app.logger import logger
 from redis import asyncio as aioredis
 import sentry_sdk
+from prometheus_fastapi_instrumentator import Instrumentator
 from app.database import engine
 from app.users.models import Users
 
@@ -25,7 +26,6 @@ sentry_sdk.init(
     traces_sample_rate=1.0,
     profiles_sample_rate=1.0,
 )
-
 app.include_router(router_bookings)
 app.include_router(router_users)
 app.include_router(router_hotels)
@@ -44,6 +44,14 @@ async def trigger_error():
 async def startup():
     redis = aioredis.from_url(f"redis://{settings.REDIS_HOST}/{settings.REDIS_HOST}")
     FastAPICache.init(RedisBackend(redis), prefix="cache")
+
+
+instrumentator = Instrumentator(
+    should_group_status_codes=False,
+    excluded_handlers=[".*admin.*", "/metrics"]
+)
+
+instrumentator.instrument(app).expose(app)
 
 
 @app.middleware("http")
